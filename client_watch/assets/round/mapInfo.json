@@ -1,0 +1,25 @@
+{
+  "default_zoom": 6,
+  "default_center": {
+    "longitude": 0,
+    "latitude": 0
+  },
+  "loaded_area": [
+    {
+      "name": "淡水",
+      "center": {
+        "longitude": 0,
+        "latitude": 0
+      },
+      "zoom": 15
+    },
+    { 
+      "name": "三和",
+      "center": {
+        "longitude": 0,
+        "latitude": 0
+      },
+      "zoom": 15
+    }
+  ]
+}

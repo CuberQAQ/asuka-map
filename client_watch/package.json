@@ -1,0 +1,21 @@
+{
+  "name": "hello-word",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cuberqaq/cubermapengine": "link:..\\CuberMapEngine\\",
+    "@cuberqaq/path-polyfill": "^1.0.2",
+    "@cuberqaq/transfer-file": "^1.0.4-pre",
+    "@cuberqaq/transfer-file-side": "^1.0.1-pre",
+    "@zeppos/device-types": "^3.0.0",
+    "@zeppos/zml": "^0.0.23",
+    "fflate": "^0.8.2",
+    "promisify": "^0.0.3"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "configVersion": "v3",
+  "app": {
+    "appId": 25884,
+    "appName": "MapTest",
+    "appType": "app",
+    "version": {
+      "code": 1,
+      "name": "1.0.1"
+    },
+    "icon": "icon.png",
+    "vender": "Kurashina Asuka",
+    "description": "experimental map app"
+  },
+  "permissions": [
+    "data:os.device.info",
+    "device:os.local_storage",
+    "device:os.geolocation"
+  ],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "3.0.0",
+      "target": "3.0.0",
+      "minVersion": "3.0"
+    }
+  },
+  "debug": false,
+  "targets": {
+    "round": {
+      "module": {
+        "page": {
+          "pages": ["page/round/home/index.page"]
+        },
+        "app-side": {
+          "path": "app-side/index"
+        },
+        "setting": {
+          "path": "setting/index"
+        }
+      },
+      "platforms": [
+        {
+          "name": "Monaco",
+          "deviceSource": 8519936
+        },
+        {
+          "name": "MonacoWN",
+          "deviceSource": 8519937
+        },
+        {
+          "name": "MonacoW",
+          "deviceSource": 8519939
+        },
+        {
+          "name": "GTR4A",
+          "deviceSource": 7930112
+        },
+        {
+          "name": "GTR4B",
+          "deviceSource": 7930113
+        },
+        {
+          "name": "GTR4C",
+          "deviceSource": 7864577
+        }
+      ],
+      "designWidth": 480
+    }
+  },
+  "i18n": {
+    "en-US": {
+      "appName": "MapTest"
+    }
+  },
+  "defaultLanguage": "en-US"
+}
