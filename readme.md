@@ -17,8 +17,11 @@
 npm install -g typescript
 ```
 之后在 CuberMapEngine 文件夹中执行tsc即可编译成js
+
 2. client_watch，也就是小程序端，直接用 zeus 命令开发
+
 3. 如果要使用自己部署的测试瓦片服务器，修改server/index.js和client_watch/app-side/index.js里面的相关端口号和url等设置。并确保端口暴露在公网
+
 4. zimg仅在server用被调用。如果需要使用zimg，提前安装好.net环境，并将zimg文件夹添加到环境变量中
 
 更多问题直接找我 QAQ
