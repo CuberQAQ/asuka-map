@@ -13,9 +13,14 @@
 
 ### 前置条件
 1. CuberMapEngine使用TypeScript开发，如果你想编译，请先安装typescript编译器。
-```bash
+```sh
 npm install -g typescript
 ```
 之后在 CuberMapEngine 文件夹中执行tsc即可编译成js
+2. client_watch，也就是小程序端，直接用 zeus 命令开发
+3. 如果要使用自己部署的测试瓦片服务器，修改server/index.js和client_watch/app-side/index.js里面的相关端口号和url等设置。并确保端口暴露在公网
+4. zimg仅在server用被调用。如果需要使用zimg，提前安装好.net环境，并将zimg文件夹添加到环境变量中
+
+更多问题直接找我 QAQ
 
 注：服务端可能用到`zimg.exe`来转换png和tga，请先加入到环境变量中.
