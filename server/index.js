@@ -45,24 +45,30 @@ app.get("/imgtile", async (req, res) => {
   console.log(`[${fileName}] 发送文件...`);
   let fileDir = "./public";
   let filePathRaw = path.join(fileDir, fileName + ".raw");
-  let filePathRawCvg = path.join(fileDir, fileName + "_cvg.raw");
+  // let filePathRawCvg = path.join(fileDir, fileName + "_cvg.raw");
   let filePathRes = path.join(fileDir, fileName + ".png");
 
   if (!existsSync(filePathRes)) {
     writeFileSync(filePathRaw, "");
-    writeFileSync(filePathRawCvg, "");
+    // writeFileSync(filePathRawCvg, "");
     writeFileSync(filePathRes, "");
     let stream = createWriteStream(filePathRaw);
-    let streamCvg = createWriteStream(filePathRawCvg);
+    // let streamCvg = createWriteStream(filePathRawCvg);
+    // await Promise.all([
+    //   fetchTile(
+    //     `http://t0.tianditu.gov.cn/vec_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX=${req.query.zoom}&TILEROW=${req.query.tileY}&TILECOL=${req.query.tileX}&tk=7a4866131a483b65961af674d665908d`,
+    //     stream
+    //   ),
+    //   fetchTile(
+    //     `http://t0.tianditu.gov.cn/cva_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX=${req.query.zoom}&TILEROW=${req.query.tileY}&TILECOL=${req.query.tileX}&tk=7a4866131a483b65961af674d665908d`,
+    //     streamCvg
+    //   ),
+    // ]);
     await Promise.all([
       fetchTile(
-        `http://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX=${req.query.zoom}&TILEROW=${req.query.tileY}&TILECOL=${req.query.tileX}&tk=7a4866131a483b65961af674d665908d`,
+        `https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=2&scale=2&style=8&x=${req.query.tileX}&y=${req.query.tileY}&z=${req.query.zoom}`,
         stream
-      ),
-      fetchTile(
-        `http://t0.tianditu.gov.cn/cia_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cia&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX=${req.query.zoom}&TILEROW=${req.query.tileY}&TILECOL=${req.query.tileX}&tk=7a4866131a483b65961af674d665908d`,
-        streamCvg
-      ),
+      )
     ]);
     // let {data, info}= await sharp(filePathRaw).sharpen().modulate({: 1.5}).toFile(filePathRes)
     let image = await jimp.read(filePathRaw);
@@ -95,7 +101,7 @@ app.get("/imgtile", async (req, res) => {
       //   [-1, 9, -1],
       //   [-1, -1, -1],
       // ])
-      .composite(await jimp.read(filePathRawCvg), 0, 0)
+      // .composite(await jimp.read(filePathRawCvg), 0, 0)
       // .color([{apply:"darken",params:[25]}])
       // .contrast(0.5)
 

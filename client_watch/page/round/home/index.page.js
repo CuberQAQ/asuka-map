@@ -221,7 +221,7 @@ Page(
       //   })
       // });
 
-      let centerCoord = GisLib.EarthCoord2WMTSZ24P(116.38, 39.9);
+      let centerCoord = GisLib.EarthCoord2WMTSZ24P(...GisLib.wgs84togcj02(116.38, 39.9));
       let naviSuccess = false;
       // let centerCoord = { x: 2147483648, y: 2147483648 }; //GisLib.EarthCoord2WMTSZ24P(GisLib.DMS2D(false,116,23,17),GisLib.DMS2D(false,39,54,27))
       let pointLayer;
@@ -234,8 +234,8 @@ Page(
             RendererType: ZPlugin.HmImgTileRenderer,
           }),
           // new ImgTileLayer({
-          //   resourceId: "vec_layer",
-          //   emptyResource: "map/emptyTile.png",
+          //   resourceId: "choose_layer",
+          //   emptyResource: "ciallo",
           //   viewableSize: { width: 3, height: 3 },
           //   RendererType: ZPlugin.HmImgTileRenderer,
           // }),
@@ -249,7 +249,7 @@ Page(
             points: [
               {
                 resourceKey: "navi_img",
-                position: GisLib.EarthCoord2WMTSZ24P(116.38, 39.9),
+                position: GisLib.EarthCoord2WMTSZ24P(...GisLib.wgs84togcj02(116.38, 39.9)),
                 key: "navi",
               },
             ],
@@ -259,6 +259,9 @@ Page(
           img_layer: new MultiLoaderITResource(
             new ZPlugin.HmMultiLoader((info) => getImgTileM(info))
           ),
+          // choose_layer: new StaticResource({
+          //   choosed: "chosedTile.png"
+          // }),
           // vec_layer: new MultiLoaderITResource(
           //   new ZPlugin.HmMultiLoader((info) => getImgTileM(info))
           // ),
@@ -283,11 +286,12 @@ Page(
           x: centerCoord.x,
           y: centerCoord.y,
         },
-        zoom: 16,
-        tileSize: 320,
+        zoom: 15,
+        tileSize: 512,
       });
       mapEngine.init();
       mapEngine.render();
+      
 
       let followNavi = false;
       callback = () => {
@@ -295,7 +299,7 @@ Page(
         if (geolocation.getStatus() === "A") {
           let latitude = geolocation.getLatitude({ format: "DD" }),
             longitude = geolocation.getLongitude({ format: "DD" });
-          centerCoord = GisLib.EarthCoord2WMTSZ24P(longitude, latitude);
+          centerCoord = GisLib.EarthCoord2WMTSZ24P(...GisLib.wgs84togcj02(longitude, latitude));
           if (!naviSuccess) {
             hmUI.showToast({ text: "定位成功" });
           }
@@ -312,6 +316,7 @@ Page(
 
       geolocation.start();
       geolocation.onChange(callback);
+      
 
       log.warn("MapEngine All done...");
       let touchLayer = hmUI.createWidget(hmUI.widget.TEXT, {
@@ -327,36 +332,44 @@ Page(
         w: px(60),
         h: px(60),
         radius: px(30),
-        normal_color: 0x333333,
-        press_color: 0x555555,
+        normal_color: 0xdddddd,
+        press_color: 0xffffff,
+        color: 0x222222,
         text: "+",
         text_size: px(36),
         click_func: () => {
+          if(mapEngine._zoom >= 15) return
           mapEngine.setZoom(mapEngine._zoom + 1);
         },
       });
+      zoomUpButton.setAlpha(128)
       let zoomDownButton = hmUI.createWidget(hmUI.widget.BUTTON, {
         x: px(250),
         y: px(15),
         w: px(60),
         h: px(60),
         radius: px(30),
-        normal_color: 0x333333,
-        press_color: 0x555555,
+        normal_color: 0xdddddd,
+        press_color: 0xffffff,
+        color: 0x222222,
         text: "-",
         text_size: px(50),
         click_func: () => {
+          if(mapEngine._zoom <= 1) return
           mapEngine.setZoom(mapEngine._zoom - 1);
         },
       });
+      zoomDownButton.setAlpha(128)
+
       let addPointButton = hmUI.createWidget(hmUI.widget.BUTTON, {
         x: px(125),
         y: px(405),
         w: px(160),
         h: px(60),
         radius: px(30),
-        normal_color: 0x333333,
-        press_color: 0x555555,
+        normal_color: 0xdddddd,
+        press_color: 0xffffff,
+        color: 0x222222,
         text: "标记",
         text_size: px(30),
         click_func: () => {
@@ -372,16 +385,22 @@ Page(
           let tip = `经度:${longitude}\n纬度:${latitude}`;
           hmUI.showToast({ text: tip });
           console.log("已标记中心点，" + tip);
+
+          // TODO
+          // 选中瓦片
+
         },
       });
+      addPointButton.setAlpha(128)
       let centerNaviButton = hmUI.createWidget(hmUI.widget.BUTTON, {
         x: px(295),
         y: px(405),
         w: px(60),
         h: px(60),
         radius: px(30),
-        normal_color: 0x333333,
-        press_color: 0x555555,
+        normal_color: 0xdddddd,
+        press_color: 0xffffff,
+        color: 0x222222,
         text: followNavi ? "开" : "关",
         text_size: px(30),
         click_func: () => {
@@ -395,6 +414,7 @@ Page(
           );
         },
       });
+      centerNaviButton.setAlpha(128)
       let clicked = {
         x: 0,
         y: 0,
@@ -413,6 +433,10 @@ Page(
         clicked.x = event.x;
         clicked.y = event.y;
       });
+
+
+
+      
     },
     onInit() {
       logger.debug("page onInit invoked");

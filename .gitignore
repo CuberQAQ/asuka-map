@@ -13,3 +13,5 @@ selenium-debug.log
 *.njsproj
 *.sln
 public/**
+__test__/**
+.env
