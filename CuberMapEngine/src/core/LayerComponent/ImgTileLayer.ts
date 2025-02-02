@@ -46,7 +46,7 @@ export class ImgTileLayer<
 
   _zoom: number = 3;
 
-  _tileSize: number = 256; // TODO
+  _tileSize: number = 512; // TODO
 
   _loadQuene: [xi: number, yi: number, dxi: number, dyi: number][];
 

@@ -87,11 +87,17 @@ AppSideService(
             _console.error("Download Failed!", event);
           };
         } else {
+          // url: `https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x=255&y=255&z=10`,
+          let url = `https://c.tile.opentopomap.org/${loadInfo.zoom}/${loadInfo.tileX}/${loadInfo.tileY}.png`;
+          _console.log(`tile url=${url}`)
           let downloadVecTask = network.downloader.downloadFile({
-            url: `http://a897331063.eicp.net:14514/imgtile?zoom=${loadInfo.zoom}&tileX=${loadInfo.tileX}&tileY=${loadInfo.tileY}`,
-            filePath: loadFileName,
+            // url: `http://a897331063.eicp.net:14514/imgtile?zoom=${loadInfo.zoom}&tileX=${loadInfo.tileX}&tileY=${loadInfo.tileY}`,
+            url,
+            // url: `https://wprd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x=${loadInfo.tileX}&y=${loadInfo.tileY}&z=${loadInfo.zoom}`,
+            // url: `https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x=${loadInfo.tileX}&y=${loadInfo.tileY}&z=${loadInfo.zoom}`,
+            filePath: loadFileName + "raw",
           });
-          downloadVecTask.onSuccess = (event) => {
+          downloadVecTask.onSuccess = async (event) => {
             // _console.warn("Download success!", event);
             // try {
             //   await image.convert({
@@ -112,6 +118,10 @@ AppSideService(
             //   return;
             // }
             // _console.warn("Convert success!");
+            await image.convert({
+              filePath: "data://download/" + loadFileName + "raw",
+              targetFilePath: "data://download/" + loadFileName,
+            });
             _console.warn("Now transfering files count=" + ++transferingCount);
             let fileObj = outbox.enqueueFile("data://download/" + loadFileName);
             let key = nextKey++;
@@ -177,8 +187,6 @@ AppSideService(
             });
             lock = false;
           };
-
-          
         }
       } else if (req.method === "AsukaMap.Init") {
         _console.warn(

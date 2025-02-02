@@ -17,7 +17,7 @@ export class HmImgTileWidget implements IImgTileWidget<ImgPathLike> {
     y: this.deviceInfo.height / 2,
   };
   _hmWidget: any;
-  _tileSize: number = 320; //TODO
+  _tileSize: number = 512; //TODO
   constructor() {
     this._hmWidget = hmUI.createWidget(hmUI.widget.IMG, {
       x: px(0),

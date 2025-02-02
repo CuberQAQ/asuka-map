@@ -5,7 +5,7 @@ import * as hmUI from "@zos/ui";
 import { getDeviceInfo } from "@zos/device";
 export class HmImgTileWidget {
     constructor() {
-        this._tileSize = 320; //TODO
+        this._tileSize = 512; //TODO
         this._hmWidget = hmUI.createWidget(hmUI.widget.IMG, {
             x: px(0),
             y: px(0),

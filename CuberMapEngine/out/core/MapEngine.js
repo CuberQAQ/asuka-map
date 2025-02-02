@@ -1,5 +1,5 @@
 export class MapEngine {
-    constructor({ layers, resouces, center, zoom = 3, tileSize = 256, }) {
+    constructor({ layers, resouces, center, zoom = 3, tileSize = 512, }) {
         this._layerList = [...layers];
         this._resourceMap = { ...resouces };
         this._centerCoord = { ...center };

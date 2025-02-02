@@ -30,7 +30,7 @@ export class PointLayer<
 
   _zoom: number = 3;
 
-  _tileSize: number = 256;
+  _tileSize: number = 512;
 
   _enable: boolean;
 

@@ -17,7 +17,7 @@ export class ImgTileLayer {
         this._resourceComponent = null;
         this._centerCoord = null; // WMTS-Z24P
         this._zoom = 3;
-        this._tileSize = 256; // TODO
+        this._tileSize = 512; // TODO
         this._rendererMatrix = null;
         this._resourceId = resourceId;
         this._emptyResource = emptyResource;

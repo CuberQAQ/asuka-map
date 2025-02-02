@@ -4,7 +4,7 @@ export class PointLayer {
         this._parent = null;
         this._centerCoord = null; // WMTS-Z24P
         this._zoom = 3;
-        this._tileSize = 256;
+        this._tileSize = 512;
         this._resourceComponent = null;
         this._rendererMap = new Map();
         this._resourceId = resourceId;

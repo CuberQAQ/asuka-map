@@ -28,7 +28,7 @@ export class MapEngine {
     resouces,
     center,
     zoom = 3,
-    tileSize = 256,
+    tileSize = 512,
   }: {
     layers: ILayerComponent[];
     resouces: { [id: string]: IResourceComponent<unknown> };
