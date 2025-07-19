@@ -1,5 +1,5 @@
 # Asuka Map
-
+> 注：本仓库暂停开发，已转移至 LenromeCafero/OpenCuMap
 ## 项目结构
 - client_watch: Zepp OS 设备小程序
 - CuberMapEngine: 地图库，给小程序使用
@@ -27,3 +27,5 @@ npm install -g typescript
 更多问题直接找我 QAQ
 
 注：服务端可能用到`zimg.exe`来转换png和tga，请先加入到环境变量中.
+
+
